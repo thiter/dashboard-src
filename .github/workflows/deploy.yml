@@ -1,0 +1,29 @@
+name: Build and Deploy Dashboard
+
+on:
+  push:
+    branches:
+      - main
+      - dashboard-src
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v4
+
+      - name: Install and Build 馃挍
+        run: |
+          cd dashboard
+          npm install
+          npm run build
+
+      - name: Deploy 馃殕
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dashboard/dist
+          branch: gh-pages # 部署到 gh-pages 分支
