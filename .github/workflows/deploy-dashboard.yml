@@ -1,0 +1,20 @@
+name: Deploy Dashboard
+on:
+  push:
+    branches: [ "dashboard-src" ] # 当此分支有变动时触发
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install and Build
+        run: |
+          cd dashboard
+          npm install
+          npm run build
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dashboard/dist
+          branch: gh-pages # 部署到 gh-pages 分支
