@@ -18,12 +18,12 @@ jobs:
 
       - name: Install and Build 馃挍
         run: |
-          cd dashboard
+          # 修正：直接在根目录运行，不再 cd dashboard
           npm install
           npm run build
 
       - name: Deploy 馃殕
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dashboard/dist
-          branch: gh-pages # 部署到 gh-pages 分支
+          folder: dist # Vite 构建出的文件夹
+          branch: gh-pages
